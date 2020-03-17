@@ -14,9 +14,12 @@ export class DevLoginCommand implements ICommand {
 		private $nsCloudOptionsProvider: ICloudOptionsProvider,
 		private $nsCloudAuthenticationService: IAuthenticationService,
 		private $nsCloudServicesPolicyService: ICloudServicesPolicyService,
+		private $nsCloudStoppageService: IStoppageService,
 		private $stringParameterBuilder: IStringParameterBuilder) { }
 
 	public async execute(args: string[]): Promise<void> {
+		this.$nsCloudStoppageService.showWarningMessageForProcess();
+
 		if (await this.$nsCloudServicesPolicyService.shouldAcceptCloudServicesPolicy()) {
 			this.$logger.info(await this.$nsCloudServicesPolicyService.getCloudServicesFullMessage());
 		}

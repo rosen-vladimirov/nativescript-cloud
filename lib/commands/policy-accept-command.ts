@@ -9,10 +9,13 @@ export class PolicyAcceptCommand implements ICommand {
 	constructor(private $nsCloudErrorsService: IErrors,
 		private $nsCloudPolicyService: IPolicyService,
 		private $nsCloudServicesPolicyService: ICloudServicesPolicyService,
+		private $nsCloudStoppageService: IStoppageService,
 		private $stringParameter: ICommandParameter,
 		private $stringParameterBuilder: IStringParameterBuilder) { }
 
 	public async execute(args: string[]): Promise<void> {
+		this.$nsCloudStoppageService.showWarningMessageForProcess();
+
 		const policyName = args[0];
 
 		if (policyName === Policies.CLOUD_SERVICES_POLICY_NAME) {

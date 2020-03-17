@@ -39,6 +39,7 @@ $injector.requirePublicClass("nsCloudServicesPolicyService", path.join(__dirname
 $injector.requirePublicClass("nsCloudConfigManager", path.join(__dirname, "cloud-config-manager"));
 // TODO: Remove in 2.0.0 - currently this service is not used, but it has been publicly exposed, so we cannot remove it without bumping the major version.
 $injector.requirePublicClass("nsCloudKinveyEulaService", path.join(__dirname, "services", "kinvey-eula-service"));
+$injector.requirePublicClass("nsCloudStoppageService", path.join(__dirname, "services", "stoppage-service"));
 
 // Services.
 $injector.require("nsCloudServerAuthService", path.join(__dirname, "services", "server", "server-auth-service"));

@@ -33,6 +33,10 @@ describe("eulaCommandHelper", () => {
 			confirm: async (prompt: string, defaultAction?: () => boolean): Promise<boolean> => true
 		});
 
+		testInjector.register("nsCloudStoppageService", {
+			showWarningMessageForProcess: (): void => undefined
+		});
+
 		return testInjector;
 	};
 

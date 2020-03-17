@@ -10,6 +10,9 @@ describe("cloud lib version command", () => {
 	it("returns the real version of the package", async () => {
 		const testInjector = new Yok();
 		testInjector.register("fs", FileSystem);
+		testInjector.register("nsCloudStoppageService", {
+			showWarningMessageForProcess: (): void => undefined
+		});
 		let message: string = null;
 		const loggerInfo = (msg: string) => {
 			message = msg;

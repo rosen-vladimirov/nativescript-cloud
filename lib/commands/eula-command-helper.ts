@@ -5,7 +5,8 @@ export class EulaCommandHelper implements IEulaCommandHelper {
 	constructor(private $nsCloudErrorsService: IErrors,
 		private $logger: ILogger,
 		private $nsCloudEulaService: IEulaService,
-		private $prompter: IPrompter) { }
+		private $prompter: IPrompter,
+		private $nsCloudStoppageService: IStoppageService) { }
 
 	public acceptEula(): Promise<void> {
 		this.$logger.printMarkdown(`Accepting EULA located at ${EulaConstants.eulaUrl}.`);
@@ -13,6 +14,8 @@ export class EulaCommandHelper implements IEulaCommandHelper {
 	}
 
 	public async ensureEulaIsAccepted(): Promise<void> {
+		this.$nsCloudStoppageService.showWarningMessageForProcess();
+
 		const eulaData = await this.$nsCloudEulaService.getEulaDataWithCache();
 		if (!eulaData.shouldAcceptEula) {
 			this.$logger.trace("Ensure EULA accepted: no need to accept EULA - already accepted.");
